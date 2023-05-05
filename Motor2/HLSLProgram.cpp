@@ -12,13 +12,24 @@ HLSLProgram::~HLSLProgram(){
 }
 
 void HLSLProgram::addAtribute(const string attributeName) {
+	glBindAttribLocation(programID, numAtribute++, attributeName.c_str());
 }
 void HLSLProgram::use() {
+	glUseProgram(programID);
+	for (int i = 0; i < numAtribute; i++)
+	{
+		glEnableVertexAttribArray(i);
+	}
 }
 void HLSLProgram::unuse() {
+	glUseProgram(0);
+	for (int i = 0; i < numAtribute; i++)
+	{
+		glDisableVertexAttribArray(i);
+	}
 }
 
-void HLSLProgram::compileshaders(const string & vertexShaderFilePath, const string & fragmentShaderFilePath) {
+void HLSLProgram::compileShaders(const string & vertexShaderFilePath, const string & fragmentShaderFilePath) {
 	programID = glCreateProgram();
 	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	if (vertexShaderID == 0) {
@@ -51,9 +62,9 @@ void HLSLProgram::compileShader(const string& shaderPath, GLuint id) {
 	if (isCompiledd == GL_FALSE) {
 		GLint maxLength = 0;
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &maxLength);
-		vector<GLchar> infoLog(maxLength)
+		vector<GLchar> infoLog(maxLength);
 		glGetShaderInfoLog(id, maxLength, &maxLength, &infoLog[0]);
-		fatalError("Shader " + shaderPath + " could not compiled " + printf("%s", &(infoLog[0)));
+		fatalError("Shader could not compiled " + printf("%s", &(infoLog[0])));
 		glDeleteShader(id);
 		return;
 	}
@@ -71,7 +82,7 @@ void HLSLProgram::linkShader() {
 		vector<GLchar> infoLog(maxLength);
 		glGetProgramInfoLog(programID, maxLength, &maxLength, &infoLog[0]);
 		glDeleteProgram(programID);
-		fatalError("Shaders could not link " + printf("%s", &*(infoLog[0));
+		fatalError("Shaders could not link " + printf("%s", &(infoLog[0])));
 		glDeleteShader(vertexShaderID);
 		glDeleteShader(fragmentShaderID);
 		return;

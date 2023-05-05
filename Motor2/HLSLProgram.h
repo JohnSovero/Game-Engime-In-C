@@ -17,7 +17,7 @@ public:
 	void addAtribute(const string attributeName);
 	void use();
 	void unuse();
-	void compileshaders(const string& vertexShaderFilePath, const string& fragmentShaderFilePath);
+	void compileShaders(const string& vertexShaderFilePath, const string& fragmentShaderFilePath);
 	void linkShader();
 	GLuint getUniformLocation(const string& name);
 };
