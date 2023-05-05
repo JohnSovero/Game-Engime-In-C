@@ -1,7 +1,7 @@
-#include "HLSLProgram.h"
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include "HLSLProgram.h"
 #include "Error.h"
 
 using namespace std;
@@ -10,6 +10,7 @@ HLSLProgram::HLSLProgram():programID(0), vertexShaderID(0), fragmentShaderID(0),
 }
 HLSLProgram::~HLSLProgram(){
 }
+
 void HLSLProgram::addAtribute(const string attributeName) {
 }
 void HLSLProgram::use() {
@@ -52,7 +53,7 @@ void HLSLProgram::compileShader(const string& shaderPath, GLuint id) {
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &maxLength);
 		vector<GLchar> infoLog(maxLength)
 		glGetShaderInfoLog(id, maxLength, &maxLength, &infoLog[0]);
-		fatalError("Shader " + shaderPath + " could not compiled " + printf("%s", & (infoLog[0)));
+		fatalError("Shader " + shaderPath + " could not compiled " + printf("%s", &(infoLog[0)));
 		glDeleteShader(id);
 		return;
 	}

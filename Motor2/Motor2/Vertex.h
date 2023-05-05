@@ -33,8 +33,3 @@ struct Vertex {
 		color.set(_r, _g, _b, _a);
 	}
 };
-
-class Vertex
-{
-};
-
