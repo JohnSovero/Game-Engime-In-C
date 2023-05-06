@@ -44,10 +44,10 @@ void Sprite::init(float x, float y, int width, int height){
 
 	for (int i = 0; i < 6; i++)
 	{
-		vertexData[i].setColor(255, 0, 0, 255);
+		vertexData[i].setColor(255, 255, 0, 255);
 	}
-	vertexData[1].setColor(0, 0, 255, 255);
-	vertexData[4].setColor(0, 255, 0, 255);
+	vertexData[2].setColor(255, 0, 255, 255);
+	vertexData[3].setColor(0, 255, 255, 255);
 	glBindBuffer(GL_ARRAY_BUFFER, vboID); 	//SETEALO EN VBOID
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW); //PASAR LA INFORMACION DEL ARRAY
 	glBindBuffer(GL_ARRAY_BUFFER, 0);	//LIBERA LA MEMORIA DE LO QUE ASIGNO

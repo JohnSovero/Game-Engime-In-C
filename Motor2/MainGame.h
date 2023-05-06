@@ -12,6 +12,7 @@ class MainGame
 private:
 	int width;
 	int height;
+	float time;
 	SDL_Window* window;
 	HLSLProgram program;
 	Sprite sprite;
