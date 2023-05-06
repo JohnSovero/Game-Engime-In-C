@@ -38,7 +38,7 @@ void MainGame::draw() {
 	glUniform1i(imageLocation, 0);
 	for (int i = 0; i < sprites.size(); i++)
 	{
-		sprites.at(i).draw();
+		sprites[i]->draw();
 	}
 	program.unuse();
 	//si tengo elementos actualizo
@@ -71,16 +71,14 @@ void MainGame::initShaders() {
 void MainGame::run() {
 	init();
 	//VERSION CON VECTOR
-	sprites.resize(2);
-	sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
-	sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
+	for (int i = 0; i < sprites.size(); i++)
+	{
+		sprites.push_back(new Sprite);
+		sprites[i]->init(-1, -1, 1, 1, "Textures/mario.png");
+	}
+	//sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
+	//sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
 
-	//VERSION CON ARRAY
-	/*Sprite sprite1, sprite2;
-	sprite1.init(-1, -1, 1, 1, "Textures/mario.png");
-	sprite2.init(0, 0, 1, 1, "Textures/yoshi.png");
-	sprites[0] = sprite1;
-	sprites[1] = sprite2;*/
 	update();
 }
 
