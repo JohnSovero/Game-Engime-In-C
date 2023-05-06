@@ -36,7 +36,7 @@ void MainGame::draw() {
 	program.use();
 	GLuint timeLocation = program.getUniformLocation("time");
 	glUniform1f(timeLocation, time);
-	time += 0.002; //tiempo
+	time += 0.002; //tiempo debe ser poco
 	sprite.draw();
 	program.unuse();
 	//si tengo elementos actualizo
