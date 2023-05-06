@@ -1,12 +1,14 @@
-#include "IDManager.h"
+#include "IOManager.h"
 #include <fstream>
+#include "Error.h"
 
-bool IDManager::readFiletoBuffer(string filePath, vector<unsigned char>& buffer)
+bool IOManager::readFiletoBuffer(string filePath, vector<unsigned char>& buffer)
 {   
     //leer el archivo, ver cuanto pesa, lo que pesa se setea todo a un vector unsigned char los bytes a convertir
     //leer la imagen, la imagen se vuelve bytes, los bytes se vuelve a imagen y luego a textura
     ifstream file(filePath, ios::binary);
     if (file.fail()) {
+        fatalError(filePath.c_str());
         return false;
     }
     file.seekg(0, ios::end);
@@ -15,6 +17,6 @@ bool IDManager::readFiletoBuffer(string filePath, vector<unsigned char>& buffer)
     fileSize -= file.tellg();
     buffer.resize(fileSize);
     file.read((char*)&(buffer[0]), fileSize);
-    file.read();
-    return false;
+    file.close();
+    return true;
 }

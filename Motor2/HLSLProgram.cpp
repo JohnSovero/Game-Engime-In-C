@@ -6,7 +6,7 @@
 
 using namespace std;
 
-HLSLProgram::HLSLProgram():programID(0), vertexShaderID(0), fragmentShaderID(0), numAtribute(0) {
+HLSLProgram::HLSLProgram() :programID(0), vertexShaderID(0), fragmentShaderID(0), numAtribute(0) {
 }
 HLSLProgram::~HLSLProgram(){
 }
@@ -48,7 +48,7 @@ void HLSLProgram::compileShader(const string& shaderPath, GLuint id) {
 	string line = "";
 	ifstream shaderFile(shaderPath);
 	if (shaderFile.fail()) {
-		fatalError("Could not open " + shaderPath);
+		fatalError(" Coul not open " + shaderPath);
 	}
 	while (getline(shaderFile, line)) {
 		filecontent += line + "\n";
@@ -60,11 +60,11 @@ void HLSLProgram::compileShader(const string& shaderPath, GLuint id) {
 	GLint isCompiledd = 0;
 	glGetShaderiv(id, GL_COMPILE_STATUS, &isCompiledd);
 	if (isCompiledd == GL_FALSE) {
-		GLint maxLength = 0;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &maxLength);
-		vector<GLchar> infoLog(maxLength);
-		glGetShaderInfoLog(id, maxLength, &maxLength, &infoLog[0]);
-		fatalError("Shader could not compiled " + printf("%s", &(infoLog[0])));
+		GLint maxLenght = 0;
+		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &maxLenght);
+		vector<GLchar> infoLog(maxLenght);
+		glGetShaderInfoLog(id, maxLenght, &maxLenght, &infoLog[0]);
+		fatalError("Shader could not compile " + printf("%s", &(infoLog[0])));
 		glDeleteShader(id);
 		return;
 	}
@@ -97,7 +97,7 @@ GLuint HLSLProgram::getUniformLocation(const string& name)
 {
 	GLuint location = glGetUniformLocation(programID, name.c_str());
 	if (location == GL_INVALID_INDEX) {
-		fatalError("Uniform " + name + "not found");
+		fatalError("Uniform " + name + " not found");
 	}
-	return GLuint();
+	return location;
 }

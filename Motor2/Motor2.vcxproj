@@ -144,20 +144,26 @@
   <ItemGroup>
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="HLSLProgram.cpp" />
-    <ClCompile Include="IDManager.cpp" />
+    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="picoPNG.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="HLSLProgram.h" />
-    <ClInclude Include="IDManager.h" />
+    <ClInclude Include="IOManager.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="picoPNG.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -34,9 +34,12 @@ void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	program.use();
+	glActiveTexture(GL_TEXTURE0);
 	GLuint timeLocation = program.getUniformLocation("time");
 	glUniform1f(timeLocation, time);
-	time += 0.002; //tiempo debe ser poco
+	time += 0.002;
+	GLuint imageLocation = program.getUniformLocation("myImage");
+	glUniform1i(imageLocation, 0);
 	sprite.draw();
 	program.unuse();
 	//si tengo elementos actualizo
@@ -56,19 +59,19 @@ void MainGame::processInput() {
 				break;
 		}
 	}
-
 }
 
 void MainGame::initShaders() {
 	program.compileShaders("Shaders/colorShaderVert.txt", "Shaders/colorShaderFrag.txt");
-	//program.addAtribute("vertexPosition");
-	//program.addAtribute("vertexColor");
+	program.addAtribute("vertexPosition");
+	program.addAtribute("vertexColor");
+	program.addAtribute("vertexUV");
 	program.linkShader();
 }
 
 void MainGame::run() {
 	init();
-	sprite.init(-1, -1, 1, 1);
+	sprite.init(-1, -1, 1, 1, "Textures/mario.png");
 	update();
 }
 
