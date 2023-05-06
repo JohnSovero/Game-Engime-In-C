@@ -36,7 +36,10 @@ void MainGame::draw() {
 	time += 0.002;
 	GLuint imageLocation = program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
-	sprite.draw();
+	for (int i = 0; i < sprites.size(); i++)
+	{
+		sprites.at(i).draw();
+	}
 	program.unuse();
 	//si tengo elementos actualizo
 	window.swapWindow();
@@ -67,7 +70,17 @@ void MainGame::initShaders() {
 
 void MainGame::run() {
 	init();
-	sprite.init(-1, -1, 1, 1, "Textures/mario.png");
+	//VERSION CON VECTOR
+	sprites.resize(2);
+	sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
+	sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
+
+	//VERSION CON ARRAY
+	/*Sprite sprite1, sprite2;
+	sprite1.init(-1, -1, 1, 1, "Textures/mario.png");
+	sprite2.init(0, 0, 1, 1, "Textures/yoshi.png");
+	sprites[0] = sprite1;
+	sprites[1] = sprite2;*/
 	update();
 }
 
