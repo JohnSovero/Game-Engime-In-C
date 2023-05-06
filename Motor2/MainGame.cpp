@@ -70,13 +70,12 @@ void MainGame::initShaders() {
 void MainGame::run() {
 	init();
 	//VERSION CON VECTOR
-	for (int i = 0; i < sprites.size(); i++)
+	for (int i = 0; i < 2; i++)
 	{
 		sprites.push_back(new Sprite);
-		sprites[i]->init(-1, -1, 1, 1, "Textures/mario.png");
 	}
-	//sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
-	//sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
+	sprites[0]->init(-1, -1, 1, 1, "Textures/mario.png");
+	sprites[1]->init(0, 0, 1, 1, "Textures/yoshi.png");
 
 	update();
 }
