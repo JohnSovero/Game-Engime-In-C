@@ -17,7 +17,8 @@ private:
 	float time;
 	Window window;
 	HLSLProgram program;
-	vector<Sprite> sprites;
+	vector<Sprite*> sprites;
+	//Sprite sprite;
 	void init();
 	void processInput();
 	void initShaders();

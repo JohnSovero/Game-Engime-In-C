@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MainGame.h"
 #include "Error.h"
+#include <time.h>
 using namespace std;
 
 MainGame::MainGame() {
@@ -8,6 +9,7 @@ MainGame::MainGame() {
 	height = 600;
 	gameState = GameState::PLAY;
 	time = 0;
+	//sprites.resize(2);
 }
 
 MainGame::~MainGame() {
@@ -38,7 +40,7 @@ void MainGame::draw() {
 	glUniform1i(imageLocation, 0);
 	for (int i = 0; i < sprites.size(); i++)
 	{
-		sprites.at(i).draw();
+		sprites[i]->draw();
 	}
 	program.unuse();
 	//si tengo elementos actualizo
@@ -71,9 +73,9 @@ void MainGame::initShaders() {
 void MainGame::run() {
 	init();
 	//VERSION CON VECTOR
-	sprites.resize(2);
-	sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
-	sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
+
+	//sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
+	//sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
 
 	//VERSION CON ARRAY
 	/*Sprite sprite1, sprite2;
@@ -85,8 +87,22 @@ void MainGame::run() {
 }
 
 void MainGame::update() {
+	int cont = 0;
+	int i = 0;
 	while (gameState != GameState::EXIT) {
+		float x = (float)rand() / RAND_MAX; 
+		x -= 1; 
+		float y = (float)rand() / RAND_MAX; 
+		y -= 1; 
+		if (cont % 100 == 0) {
+			sprites.push_back(new Sprite);
+			sprites[i]->init(x, y, 1, 1, "Textures/mario.png");
+			i++;
+		}
 		draw();
 		processInput();
+		cont++;
 	}
 }
+// -1 A 1
+// -0.9 O 0.0
