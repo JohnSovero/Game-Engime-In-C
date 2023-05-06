@@ -18,7 +18,6 @@ private:
 	Window window;
 	HLSLProgram program;
 	vector<Sprite*> sprites;
-	//Sprite sprite;
 	void init();
 	void processInput();
 	void initShaders();

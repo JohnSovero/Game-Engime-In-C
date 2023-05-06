@@ -9,7 +9,6 @@ MainGame::MainGame() {
 	height = 600;
 	gameState = GameState::PLAY;
 	time = 0;
-	//sprites.resize(2);
 }
 
 MainGame::~MainGame() {
@@ -72,17 +71,6 @@ void MainGame::initShaders() {
 
 void MainGame::run() {
 	init();
-	//VERSION CON VECTOR
-
-	//sprites[0].init(-1, -1, 1, 1, "Textures/mario.png");
-	//sprites[1].init(0, 0, 1, 1, "Textures/yoshi.png");
-
-	//VERSION CON ARRAY
-	/*Sprite sprite1, sprite2;
-	sprite1.init(-1, -1, 1, 1, "Textures/mario.png");
-	sprite2.init(0, 0, 1, 1, "Textures/yoshi.png");
-	sprites[0] = sprite1;
-	sprites[1] = sprite2;*/
 	update();
 }
 
@@ -94,7 +82,7 @@ void MainGame::update() {
 		x -= 1; 
 		float y = (float)rand() / RAND_MAX; 
 		y -= 1; 
-		if (cont % 100 == 0) {
+		if (cont % 150 == 0) {
 			sprites.push_back(new Sprite);
 			sprites[i]->init(x, y, 1, 1, "Textures/mario.png");
 			i++;
@@ -104,5 +92,3 @@ void MainGame::update() {
 		cont++;
 	}
 }
-// -1 A 1
-// -0.9 O 0.0
