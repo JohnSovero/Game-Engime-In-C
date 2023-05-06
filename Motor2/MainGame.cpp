@@ -36,10 +36,9 @@ void MainGame::draw() {
 	time += 0.002;
 	GLuint imageLocation = program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
-	for (int i = 0; i < sprites.size(); i++)
-	{
-		sprites[i]->draw();
-	}
+
+	sprites[0]->draw();
+	sprites[1]->draw();
 	program.unuse();
 	//si tengo elementos actualizo
 	window.swapWindow();
