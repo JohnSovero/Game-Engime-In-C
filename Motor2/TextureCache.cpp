@@ -22,5 +22,4 @@ GLTexture TextureCache::getTexture(string texturePath)
 		return texture;
 	}
 	return mit->second;
-	return GLTexture();
 }
