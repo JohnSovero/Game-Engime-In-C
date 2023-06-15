@@ -4,7 +4,10 @@
 #include "Sprite.h"
 #include "HLSLProgram.h"
 #include "Window.h"
+#include "Camera2D.h"
+#include "InputManager.h"
 #include <vector>
+
 enum class GameState {
 	PLAY, EXIT
 };
@@ -18,9 +21,12 @@ private:
 	Window window;
 	HLSLProgram program;
 	vector<Sprite> sprites;
+	Camera2D camera2D;
+	InputManager inputManager;
 	void init();
 	void processInput();
 	void initShaders();
+	void handleInput();
 
 public:
 	MainGame();
