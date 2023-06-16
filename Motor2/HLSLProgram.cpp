@@ -1,19 +1,22 @@
+#include "HLSLProgram.h"
 #include <vector>
 #include <fstream>
 #include <iostream>
-#include "HLSLProgram.h"
 #include "Error.h"
 
 using namespace std;
 
 HLSLProgram::HLSLProgram() :programID(0), vertexShaderID(0), fragmentShaderID(0), numAtribute(0) {
 }
-HLSLProgram::~HLSLProgram(){
+
+HLSLProgram::~HLSLProgram() {
 }
+
 
 void HLSLProgram::addAtribute(const string attributeName) {
 	glBindAttribLocation(programID, numAtribute++, attributeName.c_str());
 }
+
 void HLSLProgram::use() {
 	glUseProgram(programID);
 	for (int i = 0; i < numAtribute; i++)
@@ -21,6 +24,7 @@ void HLSLProgram::use() {
 		glEnableVertexAttribArray(i);
 	}
 }
+
 void HLSLProgram::unuse() {
 	glUseProgram(0);
 	for (int i = 0; i < numAtribute; i++)
@@ -29,7 +33,7 @@ void HLSLProgram::unuse() {
 	}
 }
 
-void HLSLProgram::compileShaders(const string & vertexShaderFilePath, const string & fragmentShaderFilePath) {
+void HLSLProgram::compileShaders(const string& vertexShaderFilePath, const string& fragmentShaderFilePath) {
 	programID = glCreateProgram();
 	vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	if (vertexShaderID == 0) {
@@ -101,3 +105,4 @@ GLuint HLSLProgram::getUniformLocation(const string& name)
 	}
 	return location;
 }
+

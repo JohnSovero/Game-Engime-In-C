@@ -2,6 +2,7 @@
 #include "GLTexture.h"
 #include "TextureCache.h"
 
+
 class ResourceManager
 {
 private:

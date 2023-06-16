@@ -19,4 +19,3 @@ public:
 	bool isKeyPressed(unsigned int keyCode);
 	~InputManager();
 };
-

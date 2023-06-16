@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-InputManager::InputManager(): mouseCoords(0.0f, 0.0f)
+InputManager::InputManager() : mouseCoords(0.0f, 0.0f)
 {
 }
 

@@ -3,10 +3,11 @@
 #include "picoPNG.h"
 #include "Error.h"
 
+
 GLTexture ImageLoader::loadPNG(string filePath)
 {
-    vector<unsigned char> in;
-    vector<unsigned char> out;
+    vector<unsigned char>in;
+    vector<unsigned char>out;
     unsigned long width, height;
     GLTexture texture = {};
 
@@ -20,7 +21,7 @@ GLTexture ImageLoader::loadPNG(string filePath)
     }
     glGenTextures(1, &(texture.id));
     glBindTexture(GL_TEXTURE_2D, texture.id);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
         GL_RGBA, GL_UNSIGNED_BYTE, &(out[0]));
     glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
