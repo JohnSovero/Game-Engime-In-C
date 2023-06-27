@@ -61,6 +61,7 @@ void MainGame::handleInput()
 	}
 	if (inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 		//cout << "CLICK IZQUIERDO" << endl;
+		createBullet();
 	}
 
 	if (inputManager.isKeyPressed(SDL_BUTTON_RIGHT)) {
@@ -70,6 +71,17 @@ void MainGame::handleInput()
 	if (inputManager.isKeyPressed(SDL_BUTTON_MIDDLE)) {
 		//cout << "CLICK CENTRO" << endl;
 	}
+}
+
+void MainGame::createBullet() {
+	glm::vec2 mouseCoords = camera2D.convertToScreenWorld(inputManager.getMouseCoords());
+	glm::vec2 playerPosition(0, 0);
+	glm::vec2 direction = mouseCoords - playerPosition;
+	direction = glm::normalize(direction);
+	//bullets.emplace_back(playerPosition, direction, 1.0f, 1000);
+
+	Bullet* bullet = new Bullet(playerPosition, direction, 1.0f, 1000);
+	bullets.push_back(bullet);
 }
 
 void MainGame::initShaders()
@@ -144,6 +156,10 @@ void MainGame::draw() {
 	for (size_t i = 0; i < zombies.size(); i++)
 	{
 		zombies[i]->draw(spriteBatch);
+	}
+	for (size_t i = 0; i < bullets.size(); i++)
+	{
+		bullets[i]->draw(spriteBatch);
 	}
 	spriteBatch.end();
 	spriteBatch.renderBatch();
