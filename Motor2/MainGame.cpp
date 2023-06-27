@@ -76,11 +76,11 @@ void MainGame::handleInput()
 void MainGame::createBullet() {
 	glm::vec2 mouseCoords = camera2D.convertToScreenWorld(inputManager.getMouseCoords());
 	glm::vec2 playerPosition(0, 0);
-	glm::vec2 direction = mouseCoords - playerPosition;
+	glm::vec2 direction = mouseCoords - player->getPosition();
 	direction = glm::normalize(direction);
 	//bullets.emplace_back(playerPosition, direction, 1.0f, 1000);
 
-	Bullet* bullet = new Bullet(playerPosition, direction, 1.0f, 1000);
+	Bullet* bullet = new Bullet(player->getPosition(), direction, 1.0f, 1000);
 	bullets.push_back(bullet);
 }
 
@@ -178,6 +178,30 @@ void MainGame::updateElements() {
 	for (size_t i = 0; i < humans.size(); i++)
 	{
 		humans[i]->update(levels[currentLevel]->getLevelData(), humans, zombies);
+	}
+	for (size_t i = 0; i < zombies.size(); i++) {
+		zombies[i]->update(levels[currentLevel]->getLevelData(), humans, zombies);
+
+		for (size_t j = 0; j < humans.size(); j++)
+		{
+			if (zombies[i]->collideWithAgent(humans[j])) {
+				zombies.push_back(new Zombie());
+				zombies.back()->init(1.3f, humans[j]->getPosition());
+				delete humans[j];
+				humans[j] = humans.back();
+				humans.pop_back();
+			}
+		}
+	}
+	for (size_t i = 0; i < bullets.size(); i++)
+	{
+		if (bullets[i]->update()) {
+			bullets[i] = bullets.back();
+			bullets.pop_back();
+		}
+		else {
+			i++;
+		}
 	}
 }
 
