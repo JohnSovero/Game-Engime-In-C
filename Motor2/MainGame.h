@@ -40,6 +40,8 @@ private:
 	vector<Sprite> sprites;
 	Camera2D camera2D;
 	InputManager inputManager;
+	int totalHumanos;
+	int totalZombies;
 	void init();
 	void initLevel();
 	void processInput();

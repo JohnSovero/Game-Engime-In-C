@@ -68,13 +68,18 @@ void MainGame::handleInput()
 		//cout << "CLICK DERECHo" << endl;
 	}
 
+	if (inputManager.isKeyPressed(SDL_BUTTON_MIDDLE)) {
+		//cout << "CLICK CENTRO" << endl;
+	}
+
 	if (inputManager.isKeyPressed(SDLK_r) && !player->getAlive()) {
 		reset();
 		initLevel();
 	}
 
-	if (inputManager.isKeyPressed(SDL_BUTTON_MIDDLE)) {
-		//cout << "CLICK CENTRO" << endl;
+	if (inputManager.isKeyPressed(SDLK_f)) {
+		cout << "Total Humanos: " << totalHumanos << endl;
+		cout << "Total Zombies: " << totalZombies << endl;
 	}
 }
 
@@ -142,6 +147,10 @@ void MainGame::initLevel() {
 		zombies.back()->init(1.3f, zombiePosition[i]);
 	}
 	spriteFont = new SpriteFont("Fonts/arial.ttf", 64);
+
+	//Se inicializan los contadores de humanos y zombies
+	totalHumanos = humans.size();
+	totalZombies = zombies.size();
 }
 
 void MainGame::draw() {
@@ -228,6 +237,7 @@ void MainGame::updateElements() {
 				if (!player->isDead()) {
 					cout << "Para revivir tienes que presionar la tecla R" << endl;
 				}
+				totalZombies--;
 				break;
 			}
 			if (zombies[i]->collideWithAgent(humans[j])) {
@@ -236,6 +246,8 @@ void MainGame::updateElements() {
 				delete humans[j];
 				humans[j] = humans.back();
 				humans.pop_back();
+				totalHumanos--;
+				totalZombies++;
 			}
 		}
 	}
