@@ -68,6 +68,11 @@ void MainGame::handleInput()
 		//cout << "CLICK DERECHo" << endl;
 	}
 
+	if (inputManager.isKeyPressed(SDLK_r) && !player->getAlive()) {
+		reset();
+		initLevel();
+	}
+
 	if (inputManager.isKeyPressed(SDL_BUTTON_MIDDLE)) {
 		//cout << "CLICK CENTRO" << endl;
 	}
@@ -111,8 +116,11 @@ void MainGame::initLevel() {
 	currentLevel = 0;
 	//inicializar player humans y zombie
 	player = new Player();
-	player->init(5.0f, levels[currentLevel]->getPlayerPosition(), &inputManager);
+	player->init(3, 5.0f, levels[currentLevel]->getPlayerPosition(), &inputManager);
+	alphaReduce = 255 / player->getVidas();
+	alphaReduceTotal = alphaReduce;
 	spriteBatch.init();
+	hudBatch.init();
 
 	std::mt19937 randomEngine(time(nullptr));
 	std::uniform_int_distribution<int>randPosX(
@@ -133,6 +141,7 @@ void MainGame::initLevel() {
 		zombies.push_back(new Zombie());
 		zombies.back()->init(1.3f, zombiePosition[i]);
 	}
+	spriteFont = new SpriteFont("Fonts/arial.ttf", 64);
 }
 
 void MainGame::draw() {
@@ -163,9 +172,26 @@ void MainGame::draw() {
 	}
 	spriteBatch.end();
 	spriteBatch.renderBatch();
+	drawHud();
 	glBindTexture(GL_TEXTURE_2D, 0);
 	program.unuse();
 	window.swapWindow();
+}
+
+void MainGame::drawHud()
+{
+	glm::mat4 cameraMatrix = camera2D.getCameraMatrix();
+	GLuint pCameraLocation = program.getUniformLocation("pCamera");
+	glUniformMatrix4fv(pCameraLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
+	char buffer[256];
+	hudBatch.begin();
+	sprintf_s(buffer, "HOLAAAAAAA");
+	Color color;
+	color.set(255, 255, 255, 255);
+	spriteFont->draw(hudBatch, buffer, glm::vec2(0, 0),
+		glm::vec2(0.5), 0.0f, color);
+	hudBatch.end();
+	hudBatch.renderBatch();
 }
 
 void MainGame::run() {
@@ -174,6 +200,13 @@ void MainGame::run() {
 }
 
 void MainGame::updateElements() {
+	if (!player->getAlive()) {
+		//cout << "No Corriendo" << endl;
+		glClearColor(0.5f, 0.7f, 0.7f, 1.0f);
+		return;
+	}
+	camera2D.update();
+	camera2D.setPosition(player->getPosition());
 	player->update(levels[currentLevel]->getLevelData(), humans, zombies);
 	for (size_t i = 0; i < humans.size(); i++)
 	{
@@ -184,6 +217,19 @@ void MainGame::updateElements() {
 
 		for (size_t j = 0; j < humans.size(); j++)
 		{
+			if (zombies[i]->collideWithAgent(player)) {
+				delete zombies[i];
+				zombies[i] = zombies.back();
+				zombies.pop_back();
+				alphaReduceTotal += alphaReduce;
+				Color otroColor = player->getColor();
+				otroColor.a -= alphaReduceTotal;
+				player->setColor(otroColor);
+				if (!player->isDead()) {
+					cout << "Para revivir tienes que presionar la tecla R" << endl;
+				}
+				break;
+			}
 			if (zombies[i]->collideWithAgent(humans[j])) {
 				zombies.push_back(new Zombie());
 				zombies.back()->init(1.3f, humans[j]->getPosition());
@@ -208,9 +254,24 @@ void MainGame::updateElements() {
 void MainGame::update() {
 	while (gameState != GameState::EXIT) {
 		draw();
-		camera2D.update();
-		camera2D.setPosition(player->getPosition());
 		processInput();
 		updateElements();
 	}
+}
+
+void MainGame::reset() {
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+	for (size_t i = 0; i < zombies.size(); i++)
+	{
+		delete zombies[i];
+	}
+	zombies.clear();
+	for (size_t i = 0; i < humans.size(); i++)
+	{
+		delete humans[i];
+	}
+	humans.clear();
+	delete player;
+	levels.clear();
+	currentLevel = 0;
 }

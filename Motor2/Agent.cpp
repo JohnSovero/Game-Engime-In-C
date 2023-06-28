@@ -1,7 +1,21 @@
 #include "Agent.h"
 #include "ResourceManager.h"
 
+Agent::Agent()
+{
+    alive = true;
+}
 
+bool Agent::isDead() 
+{
+    if (alive) {
+        vidas--;
+    }
+    if (vidas <= 0) {
+        alive = false;
+    }
+    return alive;
+}
 void Agent::checkTilePosition(const vector<string>& levelData, vector<glm::vec2>& collideTilePosition, float x, float y)
 {
     glm::vec2 cornesPos = glm::vec2(floor(x / (float)TILE_WIDTH),
@@ -45,9 +59,7 @@ void Agent::collideWithTile(glm::vec2 tilePos)
     }
 }
 
-Agent::Agent()
-{
-}
+
 
 void Agent::draw(SpriteBatch& spriteBatch)
 {
@@ -63,7 +75,6 @@ bool Agent::collideWithLevel(const vector<string>& levelData)
 
 
     checkTilePosition(levelData, collideTilePosition, position.x, position.y);
-
     checkTilePosition(levelData, collideTilePosition, position.x + AGENT_WIDTH, position.y);
     checkTilePosition(levelData, collideTilePosition, position.x, position.y + AGENT_WIDTH);
     checkTilePosition(levelData, collideTilePosition, position.x + AGENT_WIDTH, position.y + AGENT_WIDTH);

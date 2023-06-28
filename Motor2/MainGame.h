@@ -10,9 +10,10 @@
 #include "Player.h"
 #include "Human.h"
 #include "Zombie.h"
-#include "SpriteBatch.h"
 #include "Bullet.h"
 #include <vector>
+#include "SpriteBatch.h"
+#include "SpriteFont.h"
 
 enum class GameState {
 	PLAY, EXIT
@@ -23,12 +24,16 @@ class MainGame
 private:
 	int width;
 	int height;
+	SpriteFont* spriteFont;
 	SpriteBatch spriteBatch;
+	SpriteBatch hudBatch;
 	vector<Level*> levels;
 	vector<Bullet*> bullets;
 	vector<Human*> humans;
 	vector<Zombie*> zombies;
 	Player* player;
+	double alphaReduce;
+	double alphaReduceTotal;
 	int currentLevel;
 	Window window;
 	HLSLProgram program;
@@ -49,6 +54,8 @@ public:
 
 	void run();
 	void draw();
+	void drawHud();
 	void update();
+	void reset();
 };
 

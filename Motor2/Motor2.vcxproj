@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;glew32s.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;glew32s.lib;opengl32.lib;glew32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,6 +148,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameplayScreen.cpp" />
     <ClCompile Include="HLSLProgram.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScreenList.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
+    <ClCompile Include="SpriteFont.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureCache.cpp" />
@@ -173,6 +175,7 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameplayScreen.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="HLSLProgram.h" />
     <ClInclude Include="Human.h" />
@@ -189,6 +192,7 @@
     <ClInclude Include="ScreenList.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
+    <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />

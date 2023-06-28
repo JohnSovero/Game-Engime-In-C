@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Error.h"
 
 Window::Window()
 {
@@ -26,14 +27,13 @@ int Window::create(string windowName, int screenWidth, int screenHeight, unsigne
         screenWidth, screenHeight, flags);
 
     if (window == nullptr) {
-
+        fatalError("SDL not initialized");
     }
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
     GLenum error = glewInit();
     if (error != GLEW_OK) {
-
+        fatalError("GLEW not initialized");
     }
-
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
     SDL_GL_SetSwapInterval(0);
     glEnable(GL_BLEND);
