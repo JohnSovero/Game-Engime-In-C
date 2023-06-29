@@ -6,9 +6,19 @@ ScreenList::ScreenList(Game* game)
     this->game = game;
 }
 
+ScreenList::~ScreenList()
+{
+    destroy();
+}
+
+IGameScreen* ScreenList::getCurrent()
+{
+    return currentIndex == -1 ? nullptr : screen[currentIndex];
+}
+
 void ScreenList::setScreen(int nextScreen)
 {
-    currentIndex = nextScreen;
+    this->currentIndex = nextScreen;
 }
 
 void ScreenList::addScreen(IGameScreen* newScreen)
@@ -29,16 +39,6 @@ void ScreenList::destroy()
     screen.resize(0);
 }
 
-ScreenList::~ScreenList()
-{
-    destroy();
-}
-
-IGameScreen* ScreenList::getCurrent()
-{
-    return currentIndex == -1 ? nullptr : screen[currentIndex];
-}
-
 IGameScreen* ScreenList::moveNext()
 {
     IGameScreen* current = getCurrent();
@@ -56,3 +56,5 @@ IGameScreen* ScreenList::movePrevious()
     }
     return getCurrent();
 }
+
+

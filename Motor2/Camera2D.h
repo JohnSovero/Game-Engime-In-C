@@ -1,5 +1,8 @@
 #pragma once
-#include <glm\gtc\matrix_transform.hpp>
+#include<glm/gtc/matrix_transform.hpp>
+#include <iostream>
+
+using namespace std;
 
 class Camera2D
 {
@@ -18,10 +21,7 @@ public:
 		return position;
 	}
 	glm::vec2 convertToScreenWorld(glm::vec2 screenScords);
-	float getScale() {
-		return scale;
-	}
-	void setPosition(const glm::vec2& newPosition) {
+	void setPosition(glm::vec2 newPosition) {
 		position = newPosition;
 		needsUpdateMatrix = true;
 	}
@@ -32,6 +32,10 @@ public:
 	glm::mat4 getCameraMatrix() {
 		return cameraMatrix;
 	}
+	float getScale() { 
+		return scale; 
+	}
 	Camera2D();
 	~Camera2D();
 };
+

@@ -1,13 +1,14 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <unordered_map>
+
 using namespace std;
 
 class InputManager
 {
 private:
 	unordered_map<unsigned int, bool> keys;
-	unordered_map<unsigned int, bool> previuosKey;
+	unordered_map<unsigned int, bool> previousKey;
 	glm::vec2 mouseCoords;
 	bool wasKeyDown(unsigned int keyCode);
 public:
@@ -21,6 +22,6 @@ public:
 	void releaseKey(unsigned int keyCode);
 	bool isKeyPressed(unsigned int keyCode);
 	bool isKeyDown(unsigned int keyCode);
-
 	~InputManager();
 };
+

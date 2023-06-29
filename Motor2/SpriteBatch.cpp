@@ -11,7 +11,8 @@ void SpriteBatch::createVertexArray()
 	if (vbo == 0) {
 		glGenBuffers(1, &vbo);
 	}
-	if (vba == 0) {
+	if (vba == 0)
+	{
 		glGenVertexArrays(1, &vba);
 	}
 	glBindVertexArray(vba);
@@ -19,10 +20,14 @@ void SpriteBatch::createVertexArray()
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+
+    glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 		(void*)offsetof(Vertex, uv));
+
 	glBindVertexArray(0);
 }
 
@@ -44,6 +49,7 @@ void SpriteBatch::end()
 	createRenderBatches();
 }
 
+
 void SpriteBatch::createRenderBatches()
 {
 	vector<Vertex>vertices;
@@ -53,7 +59,9 @@ void SpriteBatch::createRenderBatches()
 	}
 	int cv = 0;
 	int offset = 0;
-	renderBatches.emplace_back(offset, 6, glyphPointers[0]->texture);
+	//renderBatches.emplace_back(offset, 6, glyphPointers[0]->texture);
+	RenderBatch aux = RenderBatch(offset, 6, glyphPointers[0]->texture);
+	renderBatches.push_back(aux);
 	vertices[cv++] = glyphPointers[0]->topLeft;
 	vertices[cv++] = glyphPointers[0]->bottomLeft;
 	vertices[cv++] = glyphPointers[0]->bottomRight;
@@ -63,8 +71,11 @@ void SpriteBatch::createRenderBatches()
 	offset += 6;
 	for (int i = 1; i < glyphPointers.size(); i++)
 	{
+
 		if (glyphPointers[i]->texture != glyphPointers[i - 1]->texture) {
-			renderBatches.emplace_back(offset, 6, glyphPointers[1]->texture);
+			//renderBatches.emplace_back(offset, 6, glyphPointers[1]->texture);
+			RenderBatch aux2 = RenderBatch(offset, 6, glyphPointers[i]->texture);
+			renderBatches.push_back(aux2);
 		}
 		else {
 			renderBatches.back().numVertices += 6;
@@ -99,7 +110,8 @@ void SpriteBatch::renderBatch()
 
 void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color)
 {
-	glyphs.emplace_back(destRect, uvRect, texture, depth, color);
+	Glyph aux(destRect, uvRect, texture, depth, color);
+	glyphs.push_back(aux);
 }
 
 void SpriteBatch::sortGlyph()
@@ -127,7 +139,6 @@ SpriteBatch::SpriteBatch()
 SpriteBatch::~SpriteBatch()
 {
 }
-
 
 bool SpriteBatch::compareFrontToBack(Glyph* a, Glyph* b)
 {

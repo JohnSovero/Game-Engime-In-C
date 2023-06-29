@@ -3,6 +3,7 @@
 #include "Vertex.h"
 #include <glm/glm.hpp>
 #include <vector>
+
 using namespace std;
 
 enum class GlyphSortType {
@@ -77,5 +78,6 @@ public:
 	static bool compareFrontToBack(Glyph* a, Glyph* b);
 	static bool compareBackToFront(Glyph* a, Glyph* b);
 	static bool compareTexture(Glyph* a, Glyph* b);
+	
 };
 

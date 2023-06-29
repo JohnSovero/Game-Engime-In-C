@@ -1,4 +1,5 @@
 #pragma once
+
 enum class ScreenState {
 	NONE,
 	RUNNING,
@@ -30,7 +31,7 @@ public:
 	ScreenState getState() const {
 		return currentState;
 	}
-	int getIndex() const {
+	int getIndex()const {
 		return screenIndex;
 	}
 	void setRunning() {

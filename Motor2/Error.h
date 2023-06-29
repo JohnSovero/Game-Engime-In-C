@@ -1,4 +1,4 @@
 #pragma once
 #include <string>
 
-void fatalError(std::string errorString);
+extern void fatalError(std::string errorString);

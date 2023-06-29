@@ -1,9 +1,14 @@
 #pragma once
 #include "Window.h"
 #include "InputManager.h"
+#include "IGameScreen.h"
+#include "ScreenList.h"
 #include <memory>
+
 class ScreenList;
 class IGameScreen;
+
+
 class Game
 {
 public:
@@ -20,9 +25,11 @@ protected:
 	void update();
 	void draw();
 	bool initSystems();
-	std::unique_ptr<ScreenList> screenList = nullptr;
+	std::unique_ptr<ScreenList> screenList;
 	bool isRunning = false;
 	Window window;
 	InputManager inputManager;
 	IGameScreen* currentScreen = nullptr;
+
 };
+

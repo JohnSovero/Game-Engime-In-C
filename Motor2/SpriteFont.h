@@ -3,6 +3,7 @@ This is a modified version of the SpriteFont class from the
 Seed Of Andromeda source code.
 Use it for any of your projects, commercial or otherwise,
 free of charge, but do not remove this disclaimer.
+
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS
 ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO
@@ -12,6 +13,7 @@ RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
 OF THIS SOFTWARE.
+
 November 28 2014
 Original Author: Cristian Zaloj
 Modified By: Benjamin Arnold
@@ -26,13 +28,12 @@ Modified By: Benjamin Arnold
 #include <glm/glm.hpp>
 #include <map>
 #include <vector>
-#include "SpriteBatch.h"
 
 #include "Vertex.h"
 
 
 struct GLTexture;
-class SpriteBacth;
+class SpriteBatch;
 
 struct CharGlyph {
 public:

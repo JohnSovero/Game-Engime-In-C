@@ -1,14 +1,20 @@
 #pragma once
 #include <GL/glew.h>
 #include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include "Error.h"
+
 using namespace std;
 
 class HLSLProgram
 {
 private:
-	GLuint programID;
+	GLuint programID; // Interprete de los shaders
 	GLuint fragmentShaderID;
 	GLuint vertexShaderID;
+
 	void compileShader(const string& shaderPath, GLuint id);
 public:
 	HLSLProgram();
@@ -21,3 +27,4 @@ public:
 	void linkShader();
 	GLuint getUniformLocation(const string& name);
 };
+

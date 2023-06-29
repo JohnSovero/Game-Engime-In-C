@@ -1,14 +1,16 @@
 #pragma once
 #include <SDL/SDL.h>
 #include <GL/glew.h>
-#include <String>
+#include <string>
+#include "Error.h"
 
 using namespace std;
 enum WindowFlags {
 	INVISIBLE = 0x1,
 	FULLSCREEN = 0x2,
-	BORDERLESS = 0x4
+	BORDERLESS = 0x4,
 };
+
 class Window
 {
 private:
@@ -28,3 +30,4 @@ public:
 	int create(string windowName, int screenWidth, int screenHeight,
 		unsigned int currentFlags);
 };
+

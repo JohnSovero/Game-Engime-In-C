@@ -1,8 +1,4 @@
 #include "Sprite.h"
-#include <cstddef>
-#include "Vertex.h"
-#include "ResourceManager.h"
-
 
 Sprite::Sprite() {
 	vboID = 0;
@@ -49,10 +45,9 @@ void Sprite::draw() {
 	glBindTexture(GL_TEXTURE_2D, texture.id);
 	glBindBuffer(GL_ARRAY_BUFFER, vboID);
 	glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 
-	//glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),

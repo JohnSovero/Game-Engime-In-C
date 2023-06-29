@@ -8,12 +8,12 @@
 #include "InputManager.h"
 #include "Level.h"
 #include "Player.h"
-#include "Human.h"
+#include "Human.h"	
 #include "Zombie.h"
-#include "Bullet.h"
-#include <vector>
 #include "SpriteBatch.h"
+#include "Bullet.h"
 #include "SpriteFont.h"
+#include "Box.h"
 
 enum class GameState {
 	PLAY, EXIT
@@ -24,24 +24,32 @@ class MainGame
 private:
 	int width;
 	int height;
+	int currentLevel;
+	double alphaReduce;
+	double alphaReduceTotal;
+	//float time;
+	int contadorHumanos;
+	int contadorZombies;
+	int contadorBalas;
+	int capacidadBalas;
+
 	SpriteFont* spriteFont;
 	SpriteBatch spriteBatch;
 	SpriteBatch hudBatch;
+
 	vector<Level*> levels;
-	vector<Bullet*> bullets;
 	vector<Human*> humans;
+	vector<Bullet*> bullets;
 	vector<Zombie*> zombies;
+	vector<Box*> cajas;
 	Player* player;
-	double alphaReduce;
-	double alphaReduceTotal;
-	int currentLevel;
+
 	Window window;
 	HLSLProgram program;
-	vector<Sprite> sprites;
+	Sprite sprite;
 	Camera2D camera2D;
 	InputManager inputManager;
-	int totalHumanos;
-	int totalZombies;
+
 	void init();
 	void initLevel();
 	void processInput();
@@ -52,6 +60,7 @@ private:
 public:
 	MainGame();
 	~MainGame();
+
 	GameState gameState;
 
 	void run();
@@ -59,5 +68,5 @@ public:
 	void drawHud();
 	void update();
 	void reset();
+	void showStatus();
 };
-

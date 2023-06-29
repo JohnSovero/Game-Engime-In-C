@@ -1,8 +1,6 @@
 #include "TextureCache.h"
 #include "ImageLoader.h"
 
-using namespace std;
-
 TextureCache::TextureCache()
 {
 }
@@ -22,4 +20,5 @@ GLTexture TextureCache::getTexture(string texturePath)
 		return texture;
 	}
 	return mit->second;
+
 }

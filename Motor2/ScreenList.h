@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
 using namespace std;
+
 class Game;
 class IGameScreen;
+
 class ScreenList
 {
 public:

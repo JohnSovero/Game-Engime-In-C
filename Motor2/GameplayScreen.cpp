@@ -1,5 +1,6 @@
 #include "GameplayScreen.h"
 #include "Game.h"
+
 GameplayScreen::GameplayScreen(Window* window)
 {
 	this->window = window;
@@ -17,14 +18,14 @@ void GameplayScreen::checkInput()
 	}
 }
 
-
 void GameplayScreen::onEntry()
 {
 	initSystem();
 	initGUI();
 	spriteBatch.init();
-	camera2d.init(window->getScreenWidth(), window->getScreenHeight());
+	camera2D.init(window->getScreenWidth(), window->getScreenHeight());
 }
+
 
 void GameplayScreen::initSystem()
 {
@@ -35,15 +36,17 @@ void GameplayScreen::initSystem()
 	program.linkShader();
 }
 
+void GameplayScreen::onExit()
+{
+	
+}
+
+
 void GameplayScreen::build()
 {
 }
 
 void GameplayScreen::destroy()
-{
-}
-
-void GameplayScreen::onExit()
 {
 }
 

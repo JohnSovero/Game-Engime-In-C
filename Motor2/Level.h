@@ -5,35 +5,49 @@
 
 using namespace std;
 const int TILE_WIDTH = 64;
+
 class Level
 {
+
 private:
 	vector<string> levelData;
 	int numHumans;
 	void parseLevel();
 	glm::vec2 playerPosition;
 	vector<glm::vec2> zombiesPosition;
+	vector<glm::vec2> cajasPosition;
 	SpriteBatch spriteBatch;
 public:
-	int getNumHumans()const {
+	int getNumHumans() const {
 		return numHumans;
 	}
-	glm::vec2 getPlayerPosition()const {
+	glm::vec2 getPlayerPosition() const {
 		return playerPosition;
 	}
-	vector<glm::vec2> getZombiesPosition() {
+
+	vector<glm::vec2> getZombiesPosition() const {
 		return zombiesPosition;
 	}
+	vector<glm::vec2> getCajasPosition() const {
+		return cajasPosition;
+	}
+
 	vector<string> getLevelData() {
 		return levelData;
 	}
-	int getWidth()const {
+	SpriteBatch getSpriteBatch() {
+		return spriteBatch;
+	}
+	int getWidth() const {
 		return levelData[0].size();
 	}
-	int getHeight()const {
+
+	int getHeight() const {
 		return levelData[0].size();
 	}
+
 	Level(const string& fileName);
 	void draw();
 	~Level();
 };
+

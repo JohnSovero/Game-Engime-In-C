@@ -90,6 +90,9 @@
     <ClCompile Include="SpriteFont.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -174,6 +177,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="SpriteFont.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

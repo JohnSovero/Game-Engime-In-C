@@ -1,5 +1,6 @@
 #pragma once
 #include "Agent.h"
+
 class Human : public Agent
 {
 protected:
@@ -11,3 +12,4 @@ public:
 	void update(const vector<string>& levelData, vector<Human*>& humans,
 		vector<Zombie*>& zombies);
 };
+
