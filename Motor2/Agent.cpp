@@ -86,7 +86,6 @@ bool Agent::collideWithLevel(const vector<string>& levelData)
 
 
 	checkTilePosition(levelData, collideTilePosition, position.x, position.y);
-
 	checkTilePosition(levelData, collideTilePosition, position.x + AGENT_WIDTH, position.y);
 	checkTilePosition(levelData, collideTilePosition, position.x, position.y + AGENT_WIDTH);
 	checkTilePosition(levelData, collideTilePosition, position.x + AGENT_WIDTH, position.y + AGENT_WIDTH);

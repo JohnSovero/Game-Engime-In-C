@@ -46,7 +46,9 @@ void Level::parseLevel()
 				spriteBatch.draw(desRect, uvRect, ResourceManager::getTexture("Textures/bricks.png").id, 0.0f, color);
 				break;
 			case 'G':
-				spriteBatch.draw(desRect, uvRect, ResourceManager::getTexture("Textures/glass.png").id, 0.0f, color);
+				levelData[y][x] = '.';
+				vidriosPosition.emplace_back(x * TILE_WIDTH, y * TILE_WIDTH);
+				//spriteBatch.draw(desRect, uvRect, ResourceManager::getTexture("Textures/glass.png").id, 0.0f, color);
 				break;
 			case 'L':
 				spriteBatch.draw(desRect, uvRect, ResourceManager::getTexture("Textures/light_bricks.png").id, 0.0f, color);
@@ -67,7 +69,6 @@ void Level::parseLevel()
 				break;
 			case '.':
 				spriteBatch.draw(desRect, uvRect, ResourceManager::getTexture("Textures/piso.png").id, 0.0f, colorPiso);
-
 				break;
 			default:
 				break;

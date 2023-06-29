@@ -126,6 +126,8 @@ void MainGame::updateElements()
 			delete cajas[i];
 			cajas[i] = cajas.back();
 			cajas.pop_back();
+			contadorBalas -= 50;
+			showStatus();
 		}
 	}
 
@@ -147,6 +149,7 @@ void MainGame::updateElements()
 				cout << "\nPara revivir presione R\n";
 			}
 			contadorZombies--;
+			showStatus();
 			break;
 		}
 		for (int j = 0; j < humans.size(); j++)
@@ -160,6 +163,26 @@ void MainGame::updateElements()
 				contadorHumanos--;
 				contadorZombies++;
 			}
+		}
+	}
+	for (int i = 0; i < bullets.size();)
+	{
+		bullets[i]->update(levels[currentLevel]->getLevelData(), humans, zombies);
+		if (bullets[i]->isExist()) {
+			bullets[i] = bullets.back();
+			bullets.pop_back();
+		}
+		else {
+			for (int j = 0; j < vidrios.size(); j++)
+			{
+				if (bullets[i]->collideWithAgent(vidrios[j])) {
+					delete vidrios[j];
+					vidrios[j] = vidrios.back();
+					vidrios.pop_back();
+					bullets[i]->setLifetime(1);
+				}
+			}
+			i++;
 		}
 	}
 	for (int i = 0; i < bullets.size();)
@@ -198,7 +221,7 @@ void MainGame::init() {
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 	currentLevel = 0;
-	capacidadBalas = 200;
+	capacidadBalas = 100;
 	initLevel();
 	initShaders();
 }
@@ -225,8 +248,7 @@ void MainGame::initLevel()
 	for (int i = 0; i < levels[currentLevel]->getNumHumans(); i++)
 	{
 		humans.push_back(new Human());
-		glm::vec2 pos(randomPoxX(randomEngine) * TILE_WIDTH, 
-			randomPoxY(randomEngine) * TILE_WIDTH/2);
+		glm::vec2 pos(randomPoxX(randomEngine) * TILE_WIDTH, randomPoxY(randomEngine) * TILE_WIDTH/2);
 		humans.back()->init(1.0f, pos);
 	}
 	//Creacion de Zombies
@@ -245,6 +267,15 @@ void MainGame::initLevel()
 		glm::vec2 pos(cajasData[i].x,
 			cajasData[i].y);
 		cajas.back()->init(pos);
+	}
+	//Creacion de Vidrios
+	vector<glm::vec2>vidriosData = levels[currentLevel]->getVidriosPosition();
+	for (int i = 0; i < vidriosData.size(); i++)
+	{
+		vidrios.push_back(new Glass());
+		glm::vec2 pos(vidriosData[i].x,
+			vidriosData[i].y);
+		vidrios.back()->init(pos);
 	}
 	spriteFont = new SpriteFont("Fonts/font.ttf",64);
 
@@ -288,7 +319,10 @@ void MainGame::draw() {
 	{
 		cajas[i]->draw(spriteBatch);
 	}
-
+	for (int i = 0; i < vidrios.size(); i++)
+	{
+		vidrios[i]->draw(spriteBatch);
+	}
 	spriteBatch.end();
 	spriteBatch.renderBatch();
 	drawHud();
@@ -353,5 +387,4 @@ void MainGame::showStatus()
 	cout << "Contador de Zombies : " << contadorZombies << endl;
 	cout << "Cantidad de Balas : " << capacidadBalas - contadorBalas << endl;
 	cout << "Cantidad de vidas : " << player->getVidas() << endl;
-	
 }
